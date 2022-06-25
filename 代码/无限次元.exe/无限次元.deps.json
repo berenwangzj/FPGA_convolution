@@ -1,0 +1,49 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "无限次元/1.0.0": {
+        "dependencies": {
+          "控件": "1.0.0"
+        },
+        "runtime": {
+          "无限次元.dll": {}
+        }
+      },
+      "图像处理/1.0.0": {
+        "runtime": {
+          "图像处理.dll": {}
+        }
+      },
+      "控件/1.0.0": {
+        "dependencies": {
+          "图像处理": "1.0.0"
+        },
+        "runtime": {
+          "控件.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "无限次元/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "图像处理/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "控件/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
