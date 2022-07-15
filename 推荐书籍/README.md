@@ -29,14 +29,7 @@
 [2篇《自然》论文破解血液永生的奥秘！女孩的采访曝光西方精英的丑恶](https://www.bilibili.com/video/BV1TY411p7fE)
 
 
-* 我做的视频：
-
-[吃啥能减肥、有益情绪、提升脑力、延缓衰老？](https://www.bilibili.com/read/cv13903220)
-
-[减肥的关键难点是什么？该如何克服？如何一个月瘦十斤？如何长期保持好身材？](https://www.bilibili.com/video/BV1JR4y1p7JJ)
-
-[训练恢复腹式呼吸的方法，站桩、打坐姿势要领！恢复腹式呼吸好处巨大，一劳永逸！](https://www.bilibili.com/video/BV1e3411q7oc)
-
+* 我的文章：
 
 [这些年看过的资料2007-2021](https://zhuanlan.zhihu.com/p/399687178)
 
