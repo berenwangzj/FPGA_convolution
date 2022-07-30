@@ -27,9 +27,3 @@
 ### [Kryon:未来500年的物理](https://mp.weixin.qq.com/s/LLwLO-EctM1cTufqRtpSLg)
 
 [2篇《自然》论文破解血液永生的奥秘！女孩的采访曝光西方精英的丑恶](https://www.bilibili.com/video/BV1TY411p7fE)
-
-
-* 我的文章：
-
-[这些年看过的资料2007-2021](https://zhuanlan.zhihu.com/p/399687178)
-
