@@ -12,11 +12,7 @@
 在油管上是看不到任何英文的，网友传的说MMS溶液有效性的视频的，因为都被油管删了！大药厂可不会想让大众知道竟然有这么廉价又有效的药物。
 想知道更多国内服用者的疗效报告，可以联系上面的淘宝卖家。
 
-[文章目录 - 各类慢性疾病的原因和疗愈（截止至21年12月底）](https://mp.weixin.qq.com/s/VN5a1WA9ur8xXc_lMa2LJQ)
-
-[癌症利润的真相](https://www.bilibili.com/video/BV1ah411z7ZW) 放疗化疗基本无效,之所以还在使用只是因为利润很高!! 
-
-[肉类和乳制品致癌[Meat And Dairy Cause Cancer]](https://www.bilibili.com/video/BV1cp4y1e7Vw) 
+[文章目录 - 各类慢性疾病的原因和疗愈（截止至21年12月底）](https://mp.weixin.qq.com/s/VN5a1WA9ur8xXc_lMa2LJQ) 
 
 [昴宿二外星人讯息146：先进的晶芯零点反应堆 外星技术曝光](https://mp.weixin.qq.com/s/Oz8jNKXl-lE-lnxqiBkPoQ) Nassim研究的大概就是这个 
 
