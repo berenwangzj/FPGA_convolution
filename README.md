@@ -8,7 +8,6 @@
 ## B站频道：
 * [**经常看见11：11是咋回事？有啥意义？**](https://zhuanlan.zhihu.com/p/523746992) 
 * [Kryon克里昂信息介绍](https://www.bilibili.com/video/BV1sf4y1f7Vr) 
-* [至简哲学九：为啥我们还没见到外星人？百年后的今天依然是觉醒年代！](https://www.bilibili.com/video/BV1zL41147wt) 
 
 
 ## Youtube Chanel：
