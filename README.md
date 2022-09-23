@@ -14,5 +14,5 @@
 
 [油管频道](https://www.youtube.com/channel/UCvJH-Cp7SypXvJ-e0KSOo1A) 推荐看看第一个视频评论里的视频链接!
 
-## Email: becomequantum@qq.com
+Email: becomequantum@qq.com
 也可以B站私信联系
