@@ -11,7 +11,7 @@
 
 在油管上是看不到任何英文的，网友传的说MMS溶液有效性的视频的，因为都被油管删了！大药厂可不会想让大众知道竟然有这么廉价又有效的药物。
 
-[MMS（二氧化氯），毒药？医药奇迹？ 第一部分](https://www.bilibili.com/video/BV14a411R7Xi)  [MMS（二氧化氯），毒药？医药奇迹？第二、三部分](https://www.bilibili.com/video/BV1Se4y1d7tf)
+[MMS（二氧化氯），毒药？医药奇迹？ 第一部分](https://www.bilibili.com/video/BV14a411R7Xi)  |  [MMS（二氧化氯），毒药？医药奇迹？第二、三部分](https://www.bilibili.com/video/BV1Se4y1d7tf)
 
 [文章目录 - 各类慢性疾病的原因和疗愈（截止至21年12月底）](https://mp.weixin.qq.com/s/VN5a1WA9ur8xXc_lMa2LJQ) 
 
