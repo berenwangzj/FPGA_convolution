@@ -7,12 +7,9 @@
 ### 好用的VPN:
 [西部世界VPN-不翻就能上](https://wwsj9688.xyz/)
 
-### B站频道：
+### B站频道（联系请用B站私信）：
 * [**经常看见11：11是咋回事？有啥意义？**](https://zhuanlan.zhihu.com/p/523746992) 
 * [Kryon克里昂信息介绍](https://www.bilibili.com/video/BV1sf4y1f7Vr) 
 
 
 [油管频道](https://www.youtube.com/channel/UCvJH-Cp7SypXvJ-e0KSOo1A) 推荐看看第一个视频评论里的视频链接!
-
-Email: becomequantum@qq.com
-也可以B站私信联系
