@@ -20,7 +20,8 @@
 ### [Kryon:未来500年的物理](https://mp.weixin.qq.com/s/LLwLO-EctM1cTufqRtpSLg)
 
 
-### [疫苗灾难](https://gettr.com/hashtag/%23%E7%96%AB%E8%8B%97%E7%81%BE%E9%9A%BE)  |  [解药相关信息](https://gettr.com/user/adelin)  |  [刺突蛋白也传染](https://gettr.com/post/pt6b3z7e1f)  |  [国内爆料](https://gettr.com/post/p14q15k91a8)
+### [疫苗灾难](https://gettr.com/hashtag/%23%E7%96%AB%E8%8B%97%E7%81%BE%E9%9A%BE)  |  [解药相关信息](https://gettr.com/user/adelin)  |  [刺突蛋白也传染](https://gettr.com/post/pt6b3z7e1f)  |  [国内爆料](https://gettr.com/post/p14q15k91a8) 
+###[二氧化氯治疗新冠的案例视频介绍](https://gettr.com/streaming/p1723520b8a)二氧化氯治疗新冠见效快，且几乎无后遗症，是最有效的药物。且可以服用预防。
 
 看看上面这几个链接（得用西部世界）, 打了苗后有身体不适或感觉记忆力, 脑力下降的可以服用上述MMS溶液一个月进行排毒. mRNA疫苗已经在国外造成很多死亡和残疾了，还会影响人们的生育能力, 但全世界的主流媒体依然在压制这方面的信息, 我就好奇到底要死多少人, 人类才会开始觉醒!!! 现在已经能明显看出来了， 病毒和疫苗就是灭霸们响指计划，而且执行的很成功。昴宿二外星人甚至说乌克兰战争的目的之一就是为了转移人们对于疫苗造出大量死亡的注意力。
 
