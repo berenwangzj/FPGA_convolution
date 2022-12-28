@@ -4,7 +4,10 @@
 
 [**“一夫多妻”是中国人口骤减的重要原因**](https://www.youtube.com/watch?v=2co0OtHqC7U) 嘿嘿
 
-["猝死":国外讲疫苗后遗症的纪录片, 有字幕](https://mp.weixin.qq.com/s/R7dGbj8Mc7xkBAOc80SiwQ)
+["猝死":国外讲疫苗后遗症的纪录片, 有字幕](https://mp.weixin.qq.com/s/R7dGbj8Mc7xkBAOc80SiwQ) 
+
+[新冠是基因工程生物武器](https://gettr.com/streaming/p2340xw7f71)
+
 
 ### 好用的VPN:
 [西部世界VPN-不翻就能上](https://wwsj9688.xyz/)
@@ -16,7 +19,7 @@
 * [**经常看见11：11是咋回事？有啥意义？**](https://zhuanlan.zhihu.com/p/523746992) 
 * [Kryon克里昂信息介绍](https://zhuanlan.zhihu.com/p/531021832) 
 
-### 热烈庆祝人口减少,灭霸响指计划初步成功! 哈哈
+### 为新冠逝者默哀！还要挂多少人你们才会看清病毒和疫苗就是灭霸的响指？？？
 ### 没认识到自己是个奴隶的人活该被奴役!
 ### 体会不到灭霸苦心的人活该被响指灭!
 ### 被剥削了还为奴隶主歌功颂德的就是小x红!
