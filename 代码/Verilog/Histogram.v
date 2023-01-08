@@ -1,18 +1,14 @@
 `timescale 1ns / 1ps
-//´úÂëÀ´×Ô£ºhttps://github.com/becomequantum  ±ğÍüÁËÈ¥¿´¿´ /ÍÆ¼öÊé¼® Ä¿Â¼ÏÂµÄÄÚÈİ£¬¡¶2022ÈËÀà¾õĞÑÖ¸ÄÏ¡·ÊÇÎÒĞ´µÄÒ»Ğ©ÎŞ·¨·¢³öÀ´µÄÄÚÈİ¡£
-//½â¶Á´úÂëµÄÊÓÆµ£º
-//https://www.bilibili.com/video/BV1QY411V7Pg  ÌáÉı×Ô¼ºµÄ¶ÀÁ¢Ë¼¿¼ÄÜÁ¦±È¿´¶®±ğÈËĞ´µÄ´úÂë¸üÖØÒª£¬¡°ÎŞÏŞ´ÎÔª¡±ÆµµÀÀï¡¶Ã»ÓĞ¶ÀÁ¢Ë¼¿¼ÄÜÁ¦µÄÈËÖ»ÊÇ¿É±à³Ì»úÆ÷ÈË£¡¡·ÕâĞ©ÏĞÌ¸µÄÊÓÆµ¸üÖØÒª£¡
-//https://www.youtube.com/watch?v=dE5gn4jkSbw
 
 module Histogram #(
-   parameter  DATA_WIDTH = 8,               //ÏñËØÊı¾İÎ»¿í£¬Ò»°ãÊÇ8Î»¡£
-   parameter  CNT_WIDTH = 18                //¼ÆÊıÊı×éÎ»¿í
+   parameter  DATA_WIDTH = 8,               //åƒç´ æ•°æ®ä½å®½ï¼Œä¸€èˆ¬æ˜¯8ä½ã€‚
+   parameter  CNT_WIDTH = 18                //è®¡æ•°æ•°ç»„ä½å®½
    )
    (
     input clk,
-    input VSYNC,                            //´¹Ö±Í¬²½ĞÅºÅ£¬Ò²¾ÍÊÇÖ¡ÓĞĞ§ĞÅºÅ£¬ÓÃÓÚÖ¸Ê¾Ò»Ö¡½áÊøÖ®ºóÇåÁã¼ÆÊıRamÀïµÄÊı¾İ£¬Õâ²¿·ÖÏÂÃæ´úÂëÀïÃ»Ğ´
-    input DataEn,                           //DE,Êı¾İÓĞĞ§ĞÅºÅ
-    input [DATA_WIDTH - 1 : 0] PixelData    //ÏñËØÊı¾İ
+    input VSYNC,                            //å‚ç›´åŒæ­¥ä¿¡å·ï¼Œä¹Ÿå°±æ˜¯å¸§æœ‰æ•ˆä¿¡å·ï¼Œç”¨äºæŒ‡ç¤ºä¸€å¸§ç»“æŸä¹‹åæ¸…é›¶è®¡æ•°Ramé‡Œçš„æ•°æ®ï¼Œè¿™éƒ¨åˆ†ä¸‹é¢ä»£ç é‡Œæ²¡å†™
+    input DataEn,                           //DE,æ•°æ®æœ‰æ•ˆä¿¡å·
+    input [DATA_WIDTH - 1 : 0] PixelData    //åƒç´ æ•°æ®
     );
     wire [CNT_WIDTH - 1 : 0] Cnt, CntPlus1;
     reg [DATA_WIDTH - 1 : 0] addrb;
@@ -27,14 +23,14 @@ module Histogram #(
     
     CountArray iCountArray (
       .clka(clk),            // input wire clka
-      .wea(1'b0),            // a¿Ú×öÎª¶Á¶Ë¿Ú£¬ËùÒÔĞ´Ê¹ÄÜÖÃÁã¡£
-      .addra({0, PixelData}),// PixelDataÖ»ÓĞ8Î»£¬addraÊÇ10Î»£¬ËùÒÔÇ°ÃæÒª¼Ó¸ö0²¹×ãÎ»Êı£¬²»È»Ã»²¹×ãµÄ¸ßÎ»¾ÍÊÇĞü¿ÕµÄX£¬»áµ¼ÖÂ·ÂÕæ³ö´í
-      .dina(0),              // Ğ´Êı¾İÒ²ÖÃÎª0£¬²»ÓÃµÄÊäÈëÒªÖÃÁã£¬²»ÄÜ¿Õ×Å
+      .wea(1'b0),            // aå£åšä¸ºè¯»ç«¯å£ï¼Œæ‰€ä»¥å†™ä½¿èƒ½ç½®é›¶ã€‚
+      .addra({0, PixelData}),// PixelDataåªæœ‰8ä½ï¼Œaddraæ˜¯10ä½ï¼Œæ‰€ä»¥å‰é¢è¦åŠ ä¸ª0è¡¥è¶³ä½æ•°ï¼Œä¸ç„¶æ²¡è¡¥è¶³çš„é«˜ä½å°±æ˜¯æ‚¬ç©ºçš„Xï¼Œä¼šå¯¼è‡´ä»¿çœŸå‡ºé”™
+      .dina(0),              // å†™æ•°æ®ä¹Ÿç½®ä¸º0ï¼Œä¸ç”¨çš„è¾“å…¥è¦ç½®é›¶ï¼Œä¸èƒ½ç©ºç€
       .douta(Cnt),           // output wire [17 : 0] douta
       .clkb(clk),            // input wire clkb
       .web(web),             // input wire [0 : 0] web
-      .addrb({0,addrb}),     // input wire [9 : 0] addrb   Ã»ÓĞĞ´n'b0×¢Ã÷Î»ÊıÊ±£¬Ä¬ÈÏÎª32Î»
+      .addrb({0,addrb}),     // input wire [9 : 0] addrb   æ²¡æœ‰å†™n'b0æ³¨æ˜ä½æ•°æ—¶ï¼Œé»˜è®¤ä¸º32ä½
       .dinb(CntPlus1),       // input wire [17 : 0] dinb
-      .doutb()               // Êä³öÃ»ÓÃÉÏ¿Õ×Å¾ÍĞĞ 
+      .doutb()               // è¾“å‡ºæ²¡ç”¨ä¸Šç©ºç€å°±è¡Œ 
     );    
 endmodule
