@@ -1,49 +1,49 @@
-`timescale 1ns / 1ps
-//±¾´úÂëÀ´×Ô£ºgithub.com/becomequantum/Kryon
-//´úÂë½â¶ÁÊÓÆµ£ºwww.bilibili.com/video/BV1B3411W7Ht
-//¸ÃÄ£¿éÓÃÀ´¿ØÖÆÍ¼ÏñÊı¾İµÄ»º´æ. ÊäÈëÍ¼ÏñÊı¾İ, Êä³öOPERATOR_HEIGHTĞĞËã×ÓÊı¾İ, ²¢¿ØÖÆBlock RamµÄ¶ÁĞ´. ÄËºËĞÄÄ£¿é.
+`timescale 1ns / 1ps 
+//æœ¬ä»£ç æ¥è‡ªï¼šgithub.com/becomequantum/Kryon
+//ä»£ç è§£è¯»è§†é¢‘ï¼šwww.bilibili.com/video/BV1B3411W7Ht
+//è¯¥æ¨¡å—ç”¨æ¥æ§åˆ¶å›¾åƒæ•°æ®çš„ç¼“å­˜. è¾“å…¥å›¾åƒæ•°æ®, è¾“å‡ºOPERATOR_HEIGHTè¡Œç®—å­æ•°æ®, å¹¶æ§åˆ¶Block Ramçš„è¯»å†™. ä¹ƒæ ¸å¿ƒæ¨¡å—.
 module LineBuffer
-   #(                                                                   //ÕâÀïĞ´µÄ²ÎÊıÊÇÄ¬ÈÏÖµ,ÔÚÀı»¯¸ÃÄ£¿éµÄÊ±ºò¿ÉÒÔ¸ù¾İĞèÒªĞŞ¸Ä
-   parameter DATA_WIDTH      =  8,                                      //ÏñËØÊı¾İÎ»¿í£¬Ò»°ãÊÇ8Î»£¬Ò²¿ÉÄÜÊÇ10¡¢12¡¢14Î»£¬¶şÖµÍ¼Ïñ¾ÍÊÇ1Î». The pixel data bit width is generally 8 bits, or 10, 12, and 14 bits. The binary image is 1 bits.
-   parameter ADDR_WIDTH      = 11,                                      //»º´æÍ¼ÏñµÄBlock RAMµØÖ·Î»¿í,ºÍÍ¼Ïñ¿í¶ÈÓĞ¹Ø,2^11=2048
-   parameter OPERATOR_HEIGHT =  3                                       //Ëã×ÓµÄ¸ß¶È,NxNµÄËã×ÓÕâÀï¾ÍÉèÎªN
+   #(                                                                   //è¿™é‡Œå†™çš„å‚æ•°æ˜¯é»˜è®¤å€¼,åœ¨ä¾‹åŒ–è¯¥æ¨¡å—çš„æ—¶å€™å¯ä»¥æ ¹æ®éœ€è¦ä¿®æ”¹
+   parameter DATA_WIDTH      =  8,                                      //åƒç´ æ•°æ®ä½å®½ï¼Œä¸€èˆ¬æ˜¯8ä½ï¼Œä¹Ÿå¯èƒ½æ˜¯10ã€12ã€14ä½ï¼ŒäºŒå€¼å›¾åƒå°±æ˜¯1ä½. The pixel data bit width is generally 8 bits, or 10, 12, and 14 bits. The binary image is 1 bits.
+   parameter ADDR_WIDTH      = 11,                                      //ç¼“å­˜å›¾åƒçš„Block RAMåœ°å€ä½å®½,å’Œå›¾åƒå®½åº¦æœ‰å…³,2^11=2048
+   parameter OPERATOR_HEIGHT =  3                                       //ç®—å­çš„é«˜åº¦,NxNçš„ç®—å­è¿™é‡Œå°±è®¾ä¸ºN
    )
    (
     input                                               clk           ,
-    input                                               DataEn        , //ÏñËØÊı¾İµÄEnableĞÅºÅ
-    input  [DATA_WIDTH - 1                         : 0] PixelData     , //ÏñËØÊı¾İ               
-    output [ADDR_WIDTH - 1                         : 0] addra         , //ÒÔÏÂÎªÓÃÀ´¶ÁĞ´Block RamµÄĞÅºÅ,a¶Ë¿Ú¶Á³ö,b¶Ë¿ÚĞ´»Ø    
-    input  [(OPERATOR_HEIGHT - 1) * DATA_WIDTH - 1 : 0] douta         , //NĞĞµÄËã×ÓÖ»ĞèÒª»º´æN-1ĞĞµÄÊı¾İ. The N line operator only needs to buffer N-1 lines' data  
+    input                                               DataEn        , //åƒç´ æ•°æ®çš„Enableä¿¡å·
+    input  [DATA_WIDTH - 1                         : 0] PixelData     , //åƒç´ æ•°æ®               
+    output [ADDR_WIDTH - 1                         : 0] addra         , //ä»¥ä¸‹ä¸ºç”¨æ¥è¯»å†™Block Ramçš„ä¿¡å·,aç«¯å£è¯»å‡º,bç«¯å£å†™å›    
+    input  [(OPERATOR_HEIGHT - 1) * DATA_WIDTH - 1 : 0] douta         , //Nè¡Œçš„ç®—å­åªéœ€è¦ç¼“å­˜N-1è¡Œçš„æ•°æ®. The N line operator only needs to buffer N-1 lines' data  
     output                                              web           ,
     output [ADDR_WIDTH - 1                         : 0] addrb         ,
     output [(OPERATOR_HEIGHT - 1) * DATA_WIDTH - 1 : 0] dinb          ,
-    output                                              OperatorDataEn, //Êä³öOPERATOR_HEIGHTĞĞËã×ÓÊı¾İ 
+    output                                              OperatorDataEn, //è¾“å‡ºOPERATOR_HEIGHTè¡Œç®—å­æ•°æ® 
     output [OPERATOR_HEIGHT * DATA_WIDTH - 1       : 0] OperatorData    
     );
     
-    reg    [ADDR_WIDTH - 1                         : 0] FrogCount = 0  ;//FPGAÀïµÄ¼Ä´æÆ÷¿ÉÒÔ¸³³õÊ¼Öµ,³ÌĞò¼ÓÔØºó¾ÍÊÇ³õÊ¼Öµ,ËùÒÔÒ»°ã²»ĞèÒªresetĞÅºÅ. Registers in FPGA can be assigned initial values, and the initial values are loaded after programs are loaded, so reset signals are generally not required.      
+    reg    [ADDR_WIDTH - 1                         : 0] FrogCount = 0  ;//FPGAé‡Œçš„å¯„å­˜å™¨å¯ä»¥èµ‹åˆå§‹å€¼,ç¨‹åºåŠ è½½åå°±æ˜¯åˆå§‹å€¼,æ‰€ä»¥ä¸€èˆ¬ä¸éœ€è¦resetä¿¡å·. Registers in FPGA can be assigned initial values, and the initial values are loaded after programs are loaded, so reset signals are generally not required.      
     reg    [DATA_WIDTH - 1                         : 0] PixelDataReg   ;
     reg    [OPERATOR_HEIGHT * DATA_WIDTH - 1       : 0] OperatorDataReg;
     reg    [1                                      : 0] DataEnReg      ;
     
     assign addra          = FrogCount      ,
            OperatorData   = OperatorDataReg,
-           OperatorDataEn = DataEnReg[1]   ,                            //Êı¾İÑÓÊ±ÁËÁ½¸öÖÜÆÚ,Ê¹ÄÜĞÅºÅÒ²ÒªÑÓÊ±2¸öÖÜÆÚ. The data is delayed by two cycles, so enable signal also needs to be delayed for 2 cycles.
-           addrb          = FrogCount - 2  ,                            //ÒòÎªÊı¾İÑÓÊ±ÁËÁ½¸öÖÜÆÚ,ËùÒÔĞ´»ØµØÖ·ÒªÓÃ¶ÁµØÖ·¼õ¶ş. Because the data has been delayed for two cycles, the read address should minus two.
+           OperatorDataEn = DataEnReg[1]   ,                            //æ•°æ®å»¶æ—¶äº†ä¸¤ä¸ªå‘¨æœŸ,ä½¿èƒ½ä¿¡å·ä¹Ÿè¦å»¶æ—¶2ä¸ªå‘¨æœŸ. The data is delayed by two cycles, so enable signal also needs to be delayed for 2 cycles.
+           addrb          = FrogCount - 2  ,                            //å› ä¸ºæ•°æ®å»¶æ—¶äº†ä¸¤ä¸ªå‘¨æœŸ,æ‰€ä»¥å†™å›åœ°å€è¦ç”¨è¯»åœ°å€å‡äºŒ. Because the data has been delayed for two cycles, the read address should minus two.
            web            = DataEnReg[1]   ,
            dinb           = OperatorDataReg[OPERATOR_HEIGHT * DATA_WIDTH - 1 : DATA_WIDTH];  
-                                                                        //ÔÙ´æ»ØRamµÄÊı¾İÒª°Ñ×îĞÂµÄÒ»ĞĞÒÆ½øÈ¥,×îÀÏµÄÒ»ĞĞÒÆ³ö.µÍÎ»Îª¾ÉÊı¾İ,Ò²¾ÍÊÇËã×Ó×îÉÏÃæÒ»ĞĞµÄÊı¾İ. Shift out the oldest data.
+                                                                        //å†å­˜å›Ramçš„æ•°æ®è¦æŠŠæœ€æ–°çš„ä¸€è¡Œç§»è¿›å»,æœ€è€çš„ä¸€è¡Œç§»å‡º.ä½ä½ä¸ºæ—§æ•°æ®,ä¹Ÿå°±æ˜¯ç®—å­æœ€ä¸Šé¢ä¸€è¡Œçš„æ•°æ®. Shift out the oldest data.
     always@(posedge clk)
     begin
       if(DataEn || OperatorDataEn)
-        FrogCount     <= FrogCount + 1;                                 //¼ÆÊıÓÃÒÔ²úÉú¶ÁĞ´RamµÄµØÖ·. Generate Ram reading address
+        FrogCount     <= FrogCount + 1;                                 //è®¡æ•°ç”¨ä»¥äº§ç”Ÿè¯»å†™Ramçš„åœ°å€. Generate Ram reading address
       else            
         FrogCount     <= 0;
-      PixelDataReg    <= PixelData;                                     //ÓÉÓÚ¶ÁÈ¡RamÖĞÖ®Ç°»º´æµÄÊı¾İ»á±ÈĞÂÀ´µÄÊı¾İÍíÒ»¸öÖÜÆÚ,ËùÒÔÒª°ÑĞÂÀ´µÄÊı¾İ¼Ä´æÒ»¸öÖÜÆÚºÃºÍ¶Á³öµÄÊı¾İ¶ÔÆë
-      OperatorDataReg <= {PixelDataReg,douta};                          //°Ñ¶Á³öµÄÖ®Ç°»º´æµÄÊı¾İºÍĞÂÒ»ĞĞµÄÊı¾İºÏ²¢³ÉNĞĞËã×ÓÊı¾İÊä³ö,ÕâÑùÊä³öµÄÊı¾İÓÖÑÓÊ±ÁËÒ»¸öÖÜÆÚ,¹²ÑÓÊ±Á½¸öÖÜÆÚ, ÕâÒ»¼¶¼Ä´æÆ÷¿ÉÒÔÈ¡Ïû²»Òª¡£
-      DataEnReg[0]    <= DataEn;                                        //ËùÒÔÒªÑÓÊ±Ê¹ÄÜĞÅºÅÁ½¸öÖÜÆÚ¡£Èç¹ûOperatorDataRegÕâÒ»¼¶¼Ä´æÆ÷²»ÒªÁË£¬ÑÓÊ±¾ÍÎª1¸öÖÜÆÚ¡£
+      PixelDataReg    <= PixelData;                                     //ç”±äºè¯»å–Ramä¸­ä¹‹å‰ç¼“å­˜çš„æ•°æ®ä¼šæ¯”æ–°æ¥çš„æ•°æ®æ™šä¸€ä¸ªå‘¨æœŸ,æ‰€ä»¥è¦æŠŠæ–°æ¥çš„æ•°æ®å¯„å­˜ä¸€ä¸ªå‘¨æœŸå¥½å’Œè¯»å‡ºçš„æ•°æ®å¯¹é½
+      OperatorDataReg <= {PixelDataReg,douta};                          //æŠŠè¯»å‡ºçš„ä¹‹å‰ç¼“å­˜çš„æ•°æ®å’Œæ–°ä¸€è¡Œçš„æ•°æ®åˆå¹¶æˆNè¡Œç®—å­æ•°æ®è¾“å‡º,è¿™æ ·è¾“å‡ºçš„æ•°æ®åˆå»¶æ—¶äº†ä¸€ä¸ªå‘¨æœŸ,å…±å»¶æ—¶ä¸¤ä¸ªå‘¨æœŸ, è¿™ä¸€çº§å¯„å­˜å™¨å¯ä»¥å–æ¶ˆä¸è¦ã€‚
+      DataEnReg[0]    <= DataEn;                                        //æ‰€ä»¥è¦å»¶æ—¶ä½¿èƒ½ä¿¡å·ä¸¤ä¸ªå‘¨æœŸã€‚å¦‚æœOperatorDataRegè¿™ä¸€çº§å¯„å­˜å™¨ä¸è¦äº†ï¼Œå»¶æ—¶å°±ä¸º1ä¸ªå‘¨æœŸã€‚
       DataEnReg[1]    <= DataEnReg[0];
     end 
     
 endmodule
-//²»¾õĞÑÖ»ÓĞ´Ó¾Â²ËÉı¼¶ÎªÈËÑªÂøÍ·Ãü£¬ÍÆ¼ö¿´¿´¡°ÍÆ¼öÊé¼®¡±Ä¿Â¼ÀïµÄÄÚÈİ¡£
+//ä¸è§‰é†’åªæœ‰ä»éŸ­èœå‡çº§ä¸ºäººè¡€é¦’å¤´å‘½ï¼Œæ¨èçœ‹çœ‹â€œæ¨èä¹¦ç±â€ç›®å½•é‡Œçš„å†…å®¹ã€‚
