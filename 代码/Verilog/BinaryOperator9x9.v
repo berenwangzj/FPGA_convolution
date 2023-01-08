@@ -1,25 +1,25 @@
 `timescale 1ns / 1ps
-//±¾´úÂëÀ´×Ô£ºgithub.com/becomequantum/Kryon
-//´úÂë½â¶ÁÊÓÆµ£ºwww.bilibili.com/video/BV1B3411W7Ht
-//±¾Ä£¿éÊÇ9x9¶şÖµÍ¼ÏñËã×ÓµÄÊ¾Àı,¶şÖµËã×ÓÖ÷ÒªÓÃ×÷Í¼ÏñĞÎÌ¬Ñ§²Ù×÷.¶şÖµËã×Ó¿ÉÒÔÅªµÄ±È½Ï´ó,ÄÜÊµÏÖÒ»Ğ©¼òµ¥µÄĞÎ×´ÌØÕ÷Ê¶±ğ,Ä¿±ê´óĞ¡Ê¶±ğµÈ¹¦ÄÜ
+//æœ¬ä»£ç æ¥è‡ªï¼šgithub.com/becomequantum/Kryon
+//ä»£ç è§£è¯»è§†é¢‘ï¼šwww.bilibili.com/video/BV1B3411W7Ht
+//æœ¬æ¨¡å—æ˜¯9x9äºŒå€¼å›¾åƒç®—å­çš„ç¤ºä¾‹,äºŒå€¼ç®—å­ä¸»è¦ç”¨ä½œå›¾åƒå½¢æ€å­¦æ“ä½œ.äºŒå€¼ç®—å­å¯ä»¥å¼„çš„æ¯”è¾ƒå¤§,èƒ½å®ç°ä¸€äº›ç®€å•çš„å½¢çŠ¶ç‰¹å¾è¯†åˆ«,ç›®æ ‡å¤§å°è¯†åˆ«ç­‰åŠŸèƒ½
 //This module is an example of the 9x9 binary image operator. The binary operator is mainly used in image morphological operations. 
 //The binary operator's size can be made very large, and can realize some simple functions such as: shape feature recognition, shape size recognition and so on.
-`define DATA_WIDTH        1         //Í¼ÏñÊı¾İÎ»¿í, ¶şÖµËã×Ó¾ÍÊÇ1.     It's binary operator, so pixel data width is 1
-`define OPERATOR_HEIGHT   9         //Ëã×Ó¸ß¶È,±¾ÀıÊÇ9,¿É¸ù¾İĞèÒªĞŞ¸Ä. The height of the operator, in this example it's 9, can be modified as needed
-`define ADDR_WIDTH        11        //2^11 = 2048¿ÉÖ§³ÖÒ»ĞĞ2048ÏñËØ.   Maximum 2048 pixel per line, can be modified.
+`define DATA_WIDTH        1         //å›¾åƒæ•°æ®ä½å®½, äºŒå€¼ç®—å­å°±æ˜¯1.     It's binary operator, so pixel data width is 1
+`define OPERATOR_HEIGHT   9         //ç®—å­é«˜åº¦,æœ¬ä¾‹æ˜¯9,å¯æ ¹æ®éœ€è¦ä¿®æ”¹. The height of the operator, in this example it's 9, can be modified as needed
+`define ADDR_WIDTH        11        //2^11 = 2048å¯æ”¯æŒä¸€è¡Œ2048åƒç´ .   Maximum 2048 pixel per line, can be modified.
 
 module BinaryOperator9x9(
     input                       clk      ,     
     input                       DataEn   ,                                 
     input [`DATA_WIDTH - 1 : 0] PixelData,                                 
-    output                      DataOutEn         //Ö»ÊÇÊ¾ÀıÄ£¿é,ËùÒÔÃ»ÓĞĞ´¾ßÌå½á¹ûÊä³ö,Ê¹ÓÃÊ±¿É×ÔĞĞÌí¼Ó Add whatever output you want
+    output                      DataOutEn         //åªæ˜¯ç¤ºä¾‹æ¨¡å—,æ‰€ä»¥æ²¡æœ‰å†™å…·ä½“ç»“æœè¾“å‡º,ä½¿ç”¨æ—¶å¯è‡ªè¡Œæ·»åŠ  Add whatever output you want
     );
     
     wire [`OPERATOR_HEIGHT * `DATA_WIDTH - 1 : 0] OperatorData;
     reg  [8 :0] Array0,Array1,Array2,Array3,Array4,Array5,Array6,Array7,Array8; 
     reg  [15:0] Sum;
     
-    always@(posedge clk)                          //°Ñ9x9¸öµã¶¼¼ÓÆğÀ´. Sum all 9x9 pixels¡£ÕâÑùµÄ´úÂë¿ÉÒÔĞ´¸öÉÏÎ»»ú³ÌĞò×Ô¶¯Éú³É
+    always@(posedge clk)                          //æŠŠ9x9ä¸ªç‚¹éƒ½åŠ èµ·æ¥. Sum all 9x9 pixelsã€‚è¿™æ ·çš„ä»£ç å¯ä»¥å†™ä¸ªä¸Šä½æœºç¨‹åºè‡ªåŠ¨ç”Ÿæˆ
       Sum = Array0[0] + Array0[1] + Array0[2] + Array0[3] + Array0[4] + Array0[5] + Array0[6] + Array0[7] + Array0[8] +
             Array1[0] + Array1[1] + Array1[2] + Array1[3] + Array1[4] + Array1[5] + Array1[6] + Array1[7] + Array1[8] +
             Array2[0] + Array2[1] + Array2[2] + Array2[3] + Array2[4] + Array2[5] + Array2[6] + Array2[7] + Array2[8] +
@@ -30,17 +30,17 @@ module BinaryOperator9x9(
             Array7[0] + Array7[1] + Array7[2] + Array7[3] + Array7[4] + Array7[5] + Array7[6] + Array7[7] + Array7[8] +
             Array8[0] + Array8[1] + Array8[2] + Array8[3] + Array8[4] + Array8[5] + Array8[6] + Array8[7] + Array8[8];
     
-    assign Dilation  = Sum > 0,                   //9x9Ëã×ÓÅòÕÍ½á¹û The result of 9x9 dilation
-           Erosion   = Sum >= (9*9),              //¸¯Ê´½á¹û                          erosion
-           InBetween = Sum >= ( 33);              //Õâ¸ö½á¹ûºÍ¡°ÎŞÏŞ´ÎÔª¡±Í¼Ïñ´¦ÀíÈí¼şÖĞ¡°ãĞÕÍÊ´¡±¹¦ÄÜµÄ²ÎÊıÉèÎª£ºÖ±¾¶9¡¢ãĞÖµ33Ê±Ğ§¹ûÒ»Ñù¡£Õâ¸öÊÓÆµÓĞÏêÏ¸½éÉÜ£ºwww.bilibili.com/video/BV1WY411L7Bd
+    assign Dilation  = Sum > 0,                   //9x9ç®—å­è†¨èƒ€ç»“æœ The result of 9x9 dilation
+           Erosion   = Sum >= (9*9),              //è…èš€ç»“æœ                          erosion
+           InBetween = Sum >= ( 33);              //è¿™ä¸ªç»“æœå’Œâ€œæ— é™æ¬¡å…ƒâ€å›¾åƒå¤„ç†è½¯ä»¶ä¸­â€œé˜ˆèƒ€èš€â€åŠŸèƒ½çš„å‚æ•°è®¾ä¸ºï¼šç›´å¾„9ã€é˜ˆå€¼33æ—¶æ•ˆæœä¸€æ ·ã€‚è¿™ä¸ªè§†é¢‘æœ‰è¯¦ç»†ä»‹ç»ï¼šwww.bilibili.com/video/BV1WY411L7Bd
     
-    reg    [5:0] DataEnReg;                       //½á¹ûÑÓÊ±ÁË5+1¸öÖÜÆÚ,5ÊÇÒòÎª9x9µÄËã×ÓÖĞĞÄÎ»ÖÃÊÇµÚ5; 1ÊÇ¼ÆËãSumÊ±ÑÓÊ±µÄ
+    reg    [5:0] DataEnReg;                       //ç»“æœå»¶æ—¶äº†5+1ä¸ªå‘¨æœŸ,5æ˜¯å› ä¸º9x9çš„ç®—å­ä¸­å¿ƒä½ç½®æ˜¯ç¬¬5; 1æ˜¯è®¡ç®—Sumæ—¶å»¶æ—¶çš„
     assign DataOutEn = DataEnReg[5];              //The output delayed 5+1 clock cycle, 5 is because the 9x9 operator's center position is 5; 1 is because of Sum's calculation delay
     
     always@(posedge clk)                            
     begin
       {Array8[8],Array7[8],Array6[8],Array5[8],Array4[8],Array3[8],Array2[8],Array1[8],Array0[8]} <= OperatorData;
-      Array0[7:0]    <= Array0[8:1];              //ÒÆÎ»¼Ä´æ²úÉú9x9¶şÖµËã×ÓÊı¾İÕóÁĞ,OperatorDataÖĞµÍÎ»¶ÔÓ¦Ëã×ÓÉÏÃæ     
+      Array0[7:0]    <= Array0[8:1];              //ç§»ä½å¯„å­˜äº§ç”Ÿ9x9äºŒå€¼ç®—å­æ•°æ®é˜µåˆ—,OperatorDataä¸­ä½ä½å¯¹åº”ç®—å­ä¸Šé¢     
       Array1[7:0]    <= Array1[8:1];              //Shift Reg to generate 9x9 binary operator data array, Lower bits in 'OperatorData' correspond to operator's upper part
       Array2[7:0]    <= Array2[8:1];
       Array3[7:0]    <= Array3[8:1];
@@ -49,11 +49,11 @@ module BinaryOperator9x9(
       Array6[7:0]    <= Array6[8:1];
       Array7[7:0]    <= Array7[8:1];
       Array8[7:0]    <= Array8[8:1];
-      DataEnReg[0]   <= OperatorDataEn;           //ÑÓÊ±Ê¹ÄÜĞÅºÅ,ÕâÀïµÄÑÓÊ±ÊÇ½Ó×ÅLineBufferÄ£¿éÊä³öµÄÊ¹ÄÜĞÅºÅOperatorDataEnÖ®ºóµÄ
-      DataEnReg[5:1] <= DataEnReg[4:0];           //Êä³öµÄÊ¹ÄÜĞÅºÅ³¤¶ÈÊÇºÍÊäÈëÒ»ÑùµÄ£¬Ïàµ±ÓÚ¼ÓÁËzero padding
+      DataEnReg[0]   <= OperatorDataEn;           //å»¶æ—¶ä½¿èƒ½ä¿¡å·,è¿™é‡Œçš„å»¶æ—¶æ˜¯æ¥ç€LineBufferæ¨¡å—è¾“å‡ºçš„ä½¿èƒ½ä¿¡å·OperatorDataEnä¹‹åçš„
+      DataEnReg[5:1] <= DataEnReg[4:0];           //è¾“å‡ºçš„ä½¿èƒ½ä¿¡å·é•¿åº¦æ˜¯å’Œè¾“å…¥ä¸€æ ·çš„ï¼Œç›¸å½“äºåŠ äº†zero padding
     end   
      
-    //LineBufferºÍBlock RamÀı»¯,ÕâÁ½¸öÄ£¿éºÏÆğÀ´Íê³ÉÍ¼ÏñÊı¾İµÄ»º´æºÍÊä³öNĞĞËã×ÓÊı¾İµÄ¹¤×÷
+    //LineBufferå’ŒBlock Ramä¾‹åŒ–,è¿™ä¸¤ä¸ªæ¨¡å—åˆèµ·æ¥å®Œæˆå›¾åƒæ•°æ®çš„ç¼“å­˜å’Œè¾“å‡ºNè¡Œç®—å­æ•°æ®çš„å·¥ä½œ
     //Instantiate module LineBuffer and BlockRam, They buffer image data and output N line data of the operator
     wire [`ADDR_WIDTH - 1                          : 0] addra,addrb;
     wire [(`OPERATOR_HEIGHT - 1) * `DATA_WIDTH - 1 : 0] douta, dinb;
@@ -77,14 +77,14 @@ module BinaryOperator9x9(
       .OperatorData  (OperatorData  )    
     );
     
-    //Õâ¸öBlock RamĞèÒª¸ù¾İÄãËùĞèµÄËã×Ó´óĞ¡ºÍÍ¼ÏñµÄ¿í¶ÈÀ´Éú³É,2048ÎªRamÉî¶È,¶ÔÓ¦Í¼Ïñ¿í¶È,Èç¹ûÄãµÄÍ¼Ïñ¿í¶È´óÓÚ2048,¾ÍĞèÉú³É¸üÉîµÄRam¡£Éú³ÉÊ±²»Òª¹´Ñ¡ÈÎºÎÊä³ö¼Ä´æ£¡VivadoÀïÃæÄ¬ÈÏ¹´ÉÏÁË£¬ÒªÈ¥µô£¡
-    //RamµÄ¿í¶ÈĞè>= (Ëã×Ó¸ß¶È - 1) * Êı¾İÎ»¿í. ±¾ÀıËùĞè¿í¶È >= (9 - 1)  * 1 = 8 
+    //è¿™ä¸ªBlock Raméœ€è¦æ ¹æ®ä½ æ‰€éœ€çš„ç®—å­å¤§å°å’Œå›¾åƒçš„å®½åº¦æ¥ç”Ÿæˆ,2048ä¸ºRamæ·±åº¦,å¯¹åº”å›¾åƒå®½åº¦,å¦‚æœä½ çš„å›¾åƒå®½åº¦å¤§äº2048,å°±éœ€ç”Ÿæˆæ›´æ·±çš„Ramã€‚ç”Ÿæˆæ—¶ä¸è¦å‹¾é€‰ä»»ä½•è¾“å‡ºå¯„å­˜ï¼Vivadoé‡Œé¢é»˜è®¤å‹¾ä¸Šäº†ï¼Œè¦å»æ‰ï¼
+    //Ramçš„å®½åº¦éœ€>= (ç®—å­é«˜åº¦ - 1) * æ•°æ®ä½å®½. æœ¬ä¾‹æ‰€éœ€å®½åº¦ >= (9 - 1)  * 1 = 8 
     //You need to generate this Block Ram according to your operator's size and your image's width. 2048 is the depth of the Ram, correspond to image width,
     //if your image width > 2048, then you need to generate a deeper Ram
     //Ram width needs to >= (operator's height - 1) * Data width. In this example, Ram width needs to >= (9 - 1) * 1 = 8
     BlockRam9x2048 iBlockRam9x2048 (
       .clka (clk  ),  // input  wire          clka
-      .wea  (0    ),  // input  wire [0  : 0] wea     a¶Ë¿ÚÓÃ×÷¶Á,ËùÒÔĞ´Ê¹ÄÜĞÅºÅÒªÖÃÁã. a is reading port, so wea needs to be 0
+      .wea  (0    ),  // input  wire [0  : 0] wea     aç«¯å£ç”¨ä½œè¯»,æ‰€ä»¥å†™ä½¿èƒ½ä¿¡å·è¦ç½®é›¶. a is reading port, so wea needs to be 0
       .addra(addra),  // input  wire [10 : 0] addra
       .dina (0    ),  // input  wire [8  : 0] dina
       .douta(douta),  // output wire [8  : 0] douta
@@ -93,5 +93,5 @@ module BinaryOperator9x9(
       .addrb(addrb),  // input  wire [10 : 0] addrb
       .dinb (dinb ),  // input  wire [8  : 0] dinb
       .doutb(     )   // output wire [8  : 0] doutb
-    );
+    ); 
 endmodule
