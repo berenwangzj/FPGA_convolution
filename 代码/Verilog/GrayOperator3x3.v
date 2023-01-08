@@ -1,65 +1,65 @@
-`timescale 1ns / 1ps
-//±¾´úÂëÀ´×Ô£ºgithub.com/becomequantum/Kryon
-//´úÂë½â¶ÁÊÓÆµ£ºwww.bilibili.com/video/BV1B3411W7Ht
-//±¾Ä£¿éÊÇ3x3,8Î»»Ò¶ÈÍ¼ÏñËã×ÓµÄÊ¾Àı,ÕâÑùµÄËã×Ó¿ÉÒÔ×öºÜ¶àÊÂÇé.±ÈÈçÂË²¨,Æ½»¬,±ßÔµ¼ì²âµÈ,Ò²¿ÉÓÃÓÚ´«¸ĞÆ÷Êä³öRawÊı¾İµÄBayer²åÖµ.
+`timescale 1ns / 1ps 
+//æœ¬ä»£ç æ¥è‡ªï¼šgithub.com/becomequantum/Kryon
+//ä»£ç è§£è¯»è§†é¢‘ï¼šwww.bilibili.com/video/BV1B3411W7Ht
+//æœ¬æ¨¡å—æ˜¯3x3,8ä½ç°åº¦å›¾åƒç®—å­çš„ç¤ºä¾‹,è¿™æ ·çš„ç®—å­å¯ä»¥åšå¾ˆå¤šäº‹æƒ….æ¯”å¦‚æ»¤æ³¢,å¹³æ»‘,è¾¹ç¼˜æ£€æµ‹ç­‰,ä¹Ÿå¯ç”¨äºä¼ æ„Ÿå™¨è¾“å‡ºRawæ•°æ®çš„Bayeræ’å€¼.
 //This module is an example of the 3x3, 8 bit gray image operator. Operators like this can do a lot of things, such as filtering, smoothing, edge detection, etc., and can also be used for Bayer interpolation of Raw data from image sensor output.
-//ÒÔÏÂ²ÎÊı¿É¸ù¾İĞèÒªĞŞ¸Ä The following parameters can be modified as required
-`define DATA_WIDTH        8         //Í¼ÏñÊı¾İÎ»¿í,±¾Ä£¿éÊ¾ÀıµÄÊÇ8Î»»Ò¶ÈËã×Ó,ËùÒÔÕâÀïÉèÎª8  Image data bit width, this example is 8 bit grayscale operator, so here is 8. 
-`define OPERATOR_HEIGHT   3         //Ëã×Ó¸ß¶È,±¾Ä£¿éÎª3x3Ëã×ÓÊ¾Àı,ËùÒÔÕâÀïÉèÎª3 The height of the operator, in this example it's 3
-`define ADDR_WIDTH        11        //2^11 = 2048¿ÉÖ§³ÖÒ»ĞĞ2048ÏñËØ,             Maximum 2048 pixel per line, can be modified.
+//ä»¥ä¸‹å‚æ•°å¯æ ¹æ®éœ€è¦ä¿®æ”¹ The following parameters can be modified as required
+`define DATA_WIDTH        8         //å›¾åƒæ•°æ®ä½å®½,æœ¬æ¨¡å—ç¤ºä¾‹çš„æ˜¯8ä½ç°åº¦ç®—å­,æ‰€ä»¥è¿™é‡Œè®¾ä¸º8  Image data bit width, this example is 8 bit grayscale operator, so here is 8. 
+`define OPERATOR_HEIGHT   3         //ç®—å­é«˜åº¦,æœ¬æ¨¡å—ä¸º3x3ç®—å­ç¤ºä¾‹,æ‰€ä»¥è¿™é‡Œè®¾ä¸º3 The height of the operator, in this example it's 3
+`define ADDR_WIDTH        11        //2^11 = 2048å¯æ”¯æŒä¸€è¡Œ2048åƒç´ ,             Maximum 2048 pixel per line, can be modified.
 
 module GrayOperator3x3(
     input                       clk      ,
-  //input Vsync,                                  //Èç¹ûÓÃ×÷Bayer²åÖµµÄ»°»¹ĞèÒªÊäÈëÖ¡ÓĞĞ§ĞÅºÅ,ÒòÎªĞèÒªÖªµÀÏÖÔÚÕâÒ»ĞĞÊÇµÚ¼¸ĞĞ   If use as Bayer interpolation, you also need to input the frame enable signal, because you need to know which line it is.   
+  //input Vsync,                                  //å¦‚æœç”¨ä½œBayeræ’å€¼çš„è¯è¿˜éœ€è¦è¾“å…¥å¸§æœ‰æ•ˆä¿¡å·,å› ä¸ºéœ€è¦çŸ¥é“ç°åœ¨è¿™ä¸€è¡Œæ˜¯ç¬¬å‡ è¡Œ   If use as Bayer interpolation, you also need to input the frame enable signal, because you need to know which line it is.   
     input                       DataEn   ,                                 
     input [`DATA_WIDTH - 1 : 0] PixelData,                                 
-    output                      DataOutEn         //Ö»ÊÇÊ¾ÀıÄ£¿é,ËùÒÔÃ»ÓĞĞ´¾ßÌå½á¹ûÊä³ö,Ê¹ÓÃÊ±¿É×ÔĞĞÌí¼Ó Add whatever output you want
+    output                      DataOutEn         //åªæ˜¯ç¤ºä¾‹æ¨¡å—,æ‰€ä»¥æ²¡æœ‰å†™å…·ä½“ç»“æœè¾“å‡º,ä½¿ç”¨æ—¶å¯è‡ªè¡Œæ·»åŠ  Add whatever output you want
     );
     
-    wire [`OPERATOR_HEIGHT * `DATA_WIDTH - 1 : 0] OperatorData           ; //±¾ÀıÖĞ¾ÍÊÇ[23:0],ÈıĞĞ8Î»Í¼ÏñÊı¾İ. This example is [23:0], three line of 8 bit image data.
+    wire [`OPERATOR_HEIGHT * `DATA_WIDTH - 1 : 0] OperatorData           ; //æœ¬ä¾‹ä¸­å°±æ˜¯[23:0],ä¸‰è¡Œ8ä½å›¾åƒæ•°æ®. This example is [23:0], three line of 8 bit image data.
     reg  [`DATA_WIDTH - 1                    : 0] GaussianBlur           ; 
     reg  [`DATA_WIDTH + 1                    : 0] Gx,Gy                  ; 
     wire [`DATA_WIDTH + 1                    : 0] Left,Right,Up,Down     ;
-    reg  [`DATA_WIDTH - 1                    : 0] Array00,Array01,Array02, //3x3Ëã×ÓÊı¾İÕóÁĞ,Èç¹ûÊÇ5x5µÄËã×ÓÕâÀï¾ÍÒªĞ´5x5¸ö. 3x3 operator data array, if it is 5x5 operator, here needs to write a 5X5 array
-                                                  Array10,Array11,Array12, //Array11Îª3x3Ëã×ÓµÄÖĞĞÄµã, Array11 is the center
+    reg  [`DATA_WIDTH - 1                    : 0] Array00,Array01,Array02, //3x3ç®—å­æ•°æ®é˜µåˆ—,å¦‚æœæ˜¯5x5çš„ç®—å­è¿™é‡Œå°±è¦å†™5x5ä¸ª. 3x3 operator data array, if it is 5x5 operator, here needs to write a 5X5 array
+                                                  Array10,Array11,Array12, //Array11ä¸º3x3ç®—å­çš„ä¸­å¿ƒç‚¹, Array11 is the center
                                                   Array20,Array21,Array22;    
     
-    //¶ÔËã×Ó½øĞĞµÄ¼ÆËã,²»Í¬µÄ¼ÆËã»áÓĞ²»Í¬µÄĞ§¹û.×¢Òâ,Èç¹ûÒªÔÚ½øĞĞ¸ßË¹Æ½»¬Ö®ºóÔÙ½øĞĞ±ßÔµ¼ì²â,ÄÇ¾ÍĞèÒªÁ½¸öÕâÑùµÄÄ£¿é:
-    //µÚÒ»¸öÄ£¿é½øĞĞÆ½»¬,½á¹ûÔÙÊäÈëµ½µÚ¶ş¸öÄ£¿é½øĞĞ±ßÔµ¼ì²â
+    //å¯¹ç®—å­è¿›è¡Œçš„è®¡ç®—,ä¸åŒçš„è®¡ç®—ä¼šæœ‰ä¸åŒçš„æ•ˆæœ.æ³¨æ„,å¦‚æœè¦åœ¨è¿›è¡Œé«˜æ–¯å¹³æ»‘ä¹‹åå†è¿›è¡Œè¾¹ç¼˜æ£€æµ‹,é‚£å°±éœ€è¦ä¸¤ä¸ªè¿™æ ·çš„æ¨¡å—:
+    //ç¬¬ä¸€ä¸ªæ¨¡å—è¿›è¡Œå¹³æ»‘,ç»“æœå†è¾“å…¥åˆ°ç¬¬äºŒä¸ªæ¨¡å—è¿›è¡Œè¾¹ç¼˜æ£€æµ‹
     //Different calculations have different effects. Note that two such modules are needed if the edge detection is performed after the Gauss smoothing is carried out:
     //The first module dose smooth, and the result inputs to the second module for edge detection.
     always@(posedge clk)
     begin
     	GaussianBlur <= (Array00 >> 4) + (Array01 >> 3) + (Array02 >> 4) +  
     	                (Array10 >> 3) + (Array11 >> 2) + (Array12 >> 3) +
-    	                (Array20 >> 4) + (Array21 >> 3) + (Array22 >> 4);     //¸ßË¹Æ½»¬(Ä£ºı)µÄ½á¹û,×¢ÒâÕâÑùµÄÔËËãÒªĞ¡ĞÄ½á¹ûÒç³ö.Gauss smoothing (blur) results, be careful of overflow.
+    	                (Array20 >> 4) + (Array21 >> 3) + (Array22 >> 4);     //é«˜æ–¯å¹³æ»‘(æ¨¡ç³Š)çš„ç»“æœ,æ³¨æ„è¿™æ ·çš„è¿ç®—è¦å°å¿ƒç»“æœæº¢å‡º.Gauss smoothing (blur) results, be careful of overflow.
     	                
-    	Gx           <= Right >= Left ? Right - Left : Left - Right;          //¼ÆËãSobelËã×Ó¼ÓÈ¨ºÍµÄ¾ø¶ÔÖµ Calculating the absolute value of weighted sum of the Sobel operator
+    	Gx           <= Right >= Left ? Right - Left : Left - Right;          //è®¡ç®—Sobelç®—å­åŠ æƒå’Œçš„ç»å¯¹å€¼ Calculating the absolute value of weighted sum of the Sobel operator
     	Gy           <= Up    >= Down ? Up    - Down : Down - Up   ;
     end
     
-    assign Left  = Array00 + {Array10,1'b0} + Array20,                      //¼ÆËãSobelËã×Ó¼ÓÈ¨ºÍ. Calculating the weighted sum of the Sobel operator
-           Right = Array02 + {Array12,1'b0} + Array22,                      //Éñ¾­ÍøÂçÀïµÄ²ÎÊıÔÚÍÆÀíÊ±ËãÊÇ³£Êı£¬³ËÒÔ³£Êı²»ĞèÒªDSP³Ë·¨Æ÷  
+    assign Left  = Array00 + {Array10,1'b0} + Array20,                      //è®¡ç®—Sobelç®—å­åŠ æƒå’Œ. Calculating the weighted sum of the Sobel operator
+           Right = Array02 + {Array12,1'b0} + Array22,                      //ç¥ç»ç½‘ç»œé‡Œçš„å‚æ•°åœ¨æ¨ç†æ—¶ç®—æ˜¯å¸¸æ•°ï¼Œä¹˜ä»¥å¸¸æ•°ä¸éœ€è¦DSPä¹˜æ³•å™¨  
            Up    = Array00 + {Array01,1'b0} + Array02,
            Down  = Array20 + {Array21,1'b0} + Array22;
     
-    assign Sobel = Gx + Gy >= 400;                                          //SobelËã×Ó±ßÔµ¼ì²â½á¹û,´ó¸ÅÊÇÕâÃ´ËãµÄ°É,½ö¹©²Î¿¼. 
+    assign Sobel = Gx + Gy >= 400;                                          //Sobelç®—å­è¾¹ç¼˜æ£€æµ‹ç»“æœ,å¤§æ¦‚æ˜¯è¿™ä¹ˆç®—çš„å§,ä»…ä¾›å‚è€ƒ. 
     
-    reg    [2:0] DataEnReg;          //Êä³öÊ¹ÄÜĞÅºÅÒªºÍÊä³öµÄ¼ÆËã½á¹û¶ÔÆë,Ëü¾ßÌåÒªÑÓÊ±¶àÉÙ¸öÖÜÆÚºÍËã×ÓµÄ´óĞ¡ÒÔ¼°½øĞĞ¼ÆËãÊ±¼ÓÁË¶àÉÙ¼¶¼Ä´æÆ÷ÓĞ¹Ø, Output enable signal mast be aligned with the output results, it's delay relates to the size of the operator and calcuation delay
-    assign DataOutEn = DataEnReg[2]; //±¾Ê¾ÀıÖĞÑÓÊ±ÊÇ3¸öÖÜÆÚ, 3ÁĞµÄËã×Ó»á²úÉú2¸öÖÜÆÚµÄÑÓÊ±;ÔÙ¼ÓÉÏ¼ÆËãÊ±µÄ1¸ö. 5ÁĞµÄËã×Ó»á²úÉú3¸ö,3ÎªËã×ÓÖĞĞÄÎ»ÖÃ In this example, the delay is 3 cycles, the 3 column operator produces 2 cycles' delay, plus 1 cycle delay in calcuation. 5 column operator will produces 3 cycles' delay, 3 as the center position of the operator.
-                                     //Èç¹ûÄãĞŞ¸ÄÁËËã×Ó´óĞ¡ºÍ¼ÆËãÖĞµÄ¼Ä´æÆ÷¼¶Êı,Îñ±ØÅÜ·ÂÕæÑéÖ¤Ò»ÏÂÑÓÊ±ÓĞÃ»ÓĞÅª¶Ô. If you modified the size of the operator or the register levels in the calculation, you must run simulation to verify if the delay is correct.
+    reg    [2:0] DataEnReg;          //è¾“å‡ºä½¿èƒ½ä¿¡å·è¦å’Œè¾“å‡ºçš„è®¡ç®—ç»“æœå¯¹é½,å®ƒå…·ä½“è¦å»¶æ—¶å¤šå°‘ä¸ªå‘¨æœŸå’Œç®—å­çš„å¤§å°ä»¥åŠè¿›è¡Œè®¡ç®—æ—¶åŠ äº†å¤šå°‘çº§å¯„å­˜å™¨æœ‰å…³, Output enable signal mast be aligned with the output results, it's delay relates to the size of the operator and calcuation delay
+    assign DataOutEn = DataEnReg[2]; //æœ¬ç¤ºä¾‹ä¸­å»¶æ—¶æ˜¯3ä¸ªå‘¨æœŸ, 3åˆ—çš„ç®—å­ä¼šäº§ç”Ÿ2ä¸ªå‘¨æœŸçš„å»¶æ—¶;å†åŠ ä¸Šè®¡ç®—æ—¶çš„1ä¸ª. 5åˆ—çš„ç®—å­ä¼šäº§ç”Ÿ3ä¸ª,3ä¸ºç®—å­ä¸­å¿ƒä½ç½® In this example, the delay is 3 cycles, the 3 column operator produces 2 cycles' delay, plus 1 cycle delay in calcuation. 5 column operator will produces 3 cycles' delay, 3 as the center position of the operator.
+                                     //å¦‚æœä½ ä¿®æ”¹äº†ç®—å­å¤§å°å’Œè®¡ç®—ä¸­çš„å¯„å­˜å™¨çº§æ•°,åŠ¡å¿…è·‘ä»¿çœŸéªŒè¯ä¸€ä¸‹å»¶æ—¶æœ‰æ²¡æœ‰å¼„å¯¹. If you modified the size of the operator or the register levels in the calculation, you must run simulation to verify if the delay is correct.
         
     always@(posedge clk)
     begin 
     	Array00 <= Array01; Array01 <= Array02;
     	Array10 <= Array11; Array11 <= Array12;
     	Array20 <= Array21; Array21 <= Array22;
-    	{Array22,Array12,Array02} <= OperatorData;     //ÒÆÎ»¼Ä´æ²úÉú3x3Ëã×ÓÊı¾İÕóÁĞ,OperatorDataÖĞµÍÎ»¶ÔÓ¦Ëã×ÓÉÏÃæ. Shift Reg to generate 3x3 gray operator data array, Lower bits in 'OperatorData' correspond to operator's upper part
-    	DataEnReg[0]   <=  OperatorDataEn;             //ÑÓÊ±Ê¹ÄÜĞÅºÅ,ÕâÀïµÄÑÓÊ±ÊÇ½Ó×ÅLineBufferÄ£¿éÊä³öµÄÊ¹ÄÜĞÅºÅOperatorDataEnÖ®ºóµÄ
+    	{Array22,Array12,Array02} <= OperatorData;     //ç§»ä½å¯„å­˜äº§ç”Ÿ3x3ç®—å­æ•°æ®é˜µåˆ—,OperatorDataä¸­ä½ä½å¯¹åº”ç®—å­ä¸Šé¢. Shift Reg to generate 3x3 gray operator data array, Lower bits in 'OperatorData' correspond to operator's upper part
+    	DataEnReg[0]   <=  OperatorDataEn;             //å»¶æ—¶ä½¿èƒ½ä¿¡å·,è¿™é‡Œçš„å»¶æ—¶æ˜¯æ¥ç€LineBufferæ¨¡å—è¾“å‡ºçš„ä½¿èƒ½ä¿¡å·OperatorDataEnä¹‹åçš„
     	DataEnReg[2:1] <=  DataEnReg[1:0];             //Delay output enable signal, this delay is after 'LineBuffer' module's output enable signal 'OperatorDataEn'                                   
     end
      
-    //LineBufferºÍBlock RamÀı»¯,ÕâÁ½¸öÄ£¿éºÏÆğÀ´Íê³ÉÍ¼ÏñÊı¾İµÄ»º´æºÍÊä³öNĞĞËã×ÓÊı¾İµÄ¹¤×÷
+    //LineBufferå’ŒBlock Ramä¾‹åŒ–,è¿™ä¸¤ä¸ªæ¨¡å—åˆèµ·æ¥å®Œæˆå›¾åƒæ•°æ®çš„ç¼“å­˜å’Œè¾“å‡ºNè¡Œç®—å­æ•°æ®çš„å·¥ä½œ
     //Instantiate module LineBuffer and BlockRam, They buffer image data and output N line data of the operator
     wire [`ADDR_WIDTH - 1                          : 0] addra,addrb;
     wire [(`OPERATOR_HEIGHT - 1) * `DATA_WIDTH - 1 : 0] douta, dinb;
@@ -83,14 +83,14 @@ module GrayOperator3x3(
       .OperatorData  (OperatorData  )    
     );
     
-    //Õâ¸öBlock RamĞèÒª¸ù¾İÄãËùĞèµÄËã×Ó´óĞ¡ºÍÍ¼ÏñµÄ¿í¶ÈÀ´Éú³É,2048ÎªRamÉî¶È,¶ÔÓ¦Í¼Ïñ¿í¶È,Èç¹ûÄãµÄÍ¼Ïñ¿í¶È´óÓÚ2048,¾ÍĞèÉú³É¸üÉîµÄRam¡£×¢Òâ²»Òª¹´Ñ¡Êä³ö¼Ä´æÆ÷£¡
-    //RamµÄ¿í¶ÈĞè>= (Ëã×Ó¸ß¶È - 1) * Êı¾İÎ»¿í. ±¾ÀıËùĞè¿í¶È >= (3 - 1) * 8 = 16 
+    //è¿™ä¸ªBlock Raméœ€è¦æ ¹æ®ä½ æ‰€éœ€çš„ç®—å­å¤§å°å’Œå›¾åƒçš„å®½åº¦æ¥ç”Ÿæˆ,2048ä¸ºRamæ·±åº¦,å¯¹åº”å›¾åƒå®½åº¦,å¦‚æœä½ çš„å›¾åƒå®½åº¦å¤§äº2048,å°±éœ€ç”Ÿæˆæ›´æ·±çš„Ramã€‚æ³¨æ„ä¸è¦å‹¾é€‰è¾“å‡ºå¯„å­˜å™¨ï¼
+    //Ramçš„å®½åº¦éœ€>= (ç®—å­é«˜åº¦ - 1) * æ•°æ®ä½å®½. æœ¬ä¾‹æ‰€éœ€å®½åº¦ >= (3 - 1) * 8 = 16 
     //You need to generate this Block Ram according to your operator's size and your image's width. 2048 is the depth of the Ram, correspond to image width,
     //if your image width > 2048, then you need to generate a deeper Ram
     //Ram width needs to >= (operator's height - 1) * Data width. In this example, Ram width needs to >= (3 - 1) * 8 = 16 
     BlockRam18x2048 iBlockRam18x2048 (
       .clka (clk  ),  // input  wire          clka
-      .wea  (0    ),  // input  wire [0  : 0] wea     a¶Ë¿ÚÓÃ×÷¶Á,ËùÒÔĞ´Ê¹ÄÜĞÅºÅÒªÖÃÁã a is reading port, so wea needs to be 0
+      .wea  (0    ),  // input  wire [0  : 0] wea     aç«¯å£ç”¨ä½œè¯»,æ‰€ä»¥å†™ä½¿èƒ½ä¿¡å·è¦ç½®é›¶ a is reading port, so wea needs to be 0
       .addra(addra),  // input  wire [10 : 0] addra
       .dina (0    ),  // input  wire [17 : 0] dina
       .douta(douta),  // output wire [17 : 0] douta
